@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mohammad Arshad Khan — ECE Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #080c12;
+    --bg2: #0d1420;
+    --bg3: #111a28;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --text: #e8edf5;
+    --muted: #8896a8;
+    --border: rgba(0,212,255,0.15);
+    --card: rgba(13,20,32,0.8);
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb1 { width: 500px; height: 500px; background: rgba(0,212,255,0.06); top: -100px; left: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(124,58,237,0.06); bottom: 10%; right: -50px; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,12,18,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    font-family: var(--mono);
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 5% 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content { max-width: 700px; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: rgba(0,212,255,0.05);
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    font-family: var(--sans);
+  }
+
+  .hero h1 .line1 { display: block; color: var(--text); }
+  .hero h1 .line2 {
+    display: block;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-desc span { color: var(--accent3); font-weight: 500; }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-family: var(--mono);
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+  }
+  .btn-primary:hover { background: #00b8d9; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,212,255,0.3); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 5%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 600;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .section-line {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    margin-bottom: 60px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s;
+  }
+
+  .info-item:hover { border-color: var(--accent); }
+
+  .info-icon {
+    width: 36px; height: 36px;
+    background: rgba(0,212,255,0.1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .info-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; font-family: var(--mono); }
+  .info-val { font-size: 14px; color: var(--text); margin-top: 2px; }
+
+  /* SKILLS */
+  .skills-bg { background: var(--bg2); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .skill-card:hover { border-color: rgba(0,212,255,0.3); transform: translateY(-4px); }
+  .skill-card:hover::before { transform: scaleX(1); }
+
+  .skill-icon { font-size: 28px; margin-bottom: 16px; }
+  .skill-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .skill-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent);
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .project-card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+  .project-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+
+  .project-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
+  .project-desc { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+
+  .project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tech-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.2);
+    color: #a78bfa;
+    border-radius: 2px;
+  }
+
+  /* CONTACT */
+  .contact-bg { background: var(--bg2); }
+
+  .contact-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-desc {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .contact-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 20px;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+  .contact-card-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+  .contact-card-label { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; font-family: var(--mono); margin-bottom: 4px; }
+  .contact-card-val { font-size: 14px; color: var(--text); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-copy { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .footer-accent { color: var(--accent); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* CURSOR DOT */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-cards { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">MAK //</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1>
+      <span class="line1">Mohammad Arshad</span>
+      <span class="line2">Khan</span>
+    </h1>
+    <p class="hero-desc">
+      <span>Electronics &amp; Communication Engineer</span> — designing intelligent embedded systems, building circuits that think, and bridging the gap between hardware and software.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Get in Touch →</a>
+      <a href="#projects" class="btn btn-outline">View Projects</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">ECE</span>
+        <span class="stat-label">Specialization</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">6+</span>
+        <span class="stat-label">Projects Built</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">BLR</span>
+        <span class="stat-label">Based In</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <span class="section-tag">// 01 — About</span>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="section-line"></div>
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>I am <strong>Mohammad Arshad Khan</strong>, an Electronics and Communication Engineering student at <strong>Cambridge Institute of Technology, Bengaluru</strong>. I am passionate about the intersection of hardware and software — where circuits meet code.</p>
+      <p>My focus lies in <strong>embedded systems design</strong>, microcontroller programming, and IoT development. I enjoy building real-world solutions that solve practical problems through intelligent hardware design and efficient firmware.</p>
+      <p>Beyond engineering, I am also a <strong>content writer</strong> with a knack for breaking down complex technical concepts into clear, engaging narratives. I believe communication is just as important as technical skill in today's engineering world.</p>
+    </div>
+    <div class="about-info fade-up">
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Location</div>
+          <div class="info-val">Bengaluru, Karnataka, India</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🎓</div>
+        <div>
+          <div class="info-label">Education</div>
+          <div class="info-val">Cambridge Institute of Technology</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">⚡</div>
+        <div>
+          <div class="info-label">Specialization</div>
+          <div class="info-val">Electronics &amp; Communication Engineering</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-val">+91 7518788706</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-val">aarifkhan00877@gmail.com</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">💼</div>
+        <div>
+          <div class="info-label">Status</div>
+          <div class="info-val" style="color:var(--accent3)">Open to Opportunities</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <span class="section-tag">// 02 — Skills</span>
+  <h2 class="section-title">What I Work With</h2>
+  <div class="section-line"></div>
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🔌</div>
+      <div class="skill-title">Embedded Systems</div>
+      <div class="skill-desc">Designing and programming microcontroller-based systems for real-world applications with efficient resource management.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Arduino</span>
+        <span class="skill-tag">8051</span>
+        <span class="skill-tag">Embedded C</span>
+        <span class="skill-tag">RTOS</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">📡</div>
+      <div class="skill-title">Communication Protocols</div>
+      <div class="skill-desc">Implementing serial and wireless communication protocols for device-to-device data exchange in embedded environments.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">UART</span>
+        <span class="skill-tag">SPI</span>
+        <span class="skill-tag">I2C</span>
+        <span class="skill-tag">Bluetooth</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-title">IoT Development</div>
+      <div class="skill-desc">Building connected devices that gather, process and transmit data to enable smart and automated environments.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">ESP32</span>
+        <span class="skill-tag">MQTT</span>
+        <span class="skill-tag">NodeMCU</span>
+        <span class="skill-tag">Sensors</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-title">Programming</div>
+      <div class="skill-desc">Writing clean, efficient code for both embedded firmware development and high-level data processing applications.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Embedded C</span>
+        <span class="skill-tag">MATLAB</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🖥️</div>
+      <div class="skill-title">PCB &amp; Circuit Design</div>
+      <div class="skill-desc">Designing and analyzing electronic circuits and PCB layouts for prototype development and testing.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PCB Design</span>
+        <span class="skill-tag">Circuit Analysis</span>
+        <span class="skill-tag">Prototyping</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">✍️</div>
+      <div class="skill-title">Technical Writing</div>
+      <div class="skill-desc">Creating clear, well-structured technical documentation, articles and content that communicates complex ideas effectively.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Content Writing</span>
+        <span class="skill-tag">Documentation</span>
+        <span class="skill-tag">MS Office</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <span class="section-tag">// 03 — Projects</span>
+  <h2 class="section-title">Things I've Built</h2>
+  <div class="section-line"></div>
+  <div class="projects-grid">
+    <div class="project-card fade-up">
+      <div class="project-num">PROJECT_01</div>
+      <div class="project-title">Smart Home Automation System</div>
+      <div class="project-desc">IoT-based home automation prototype enabling remote control of appliances via mobile app. Integrated temperature, motion and light sensors for intelligent automated responses and real-time monitoring.</div>
+      <div class="project-tech">
+        <span class="tech-badge">Arduino</span>
+        <span class="tech-badge">ESP32</span>
+        <span class="tech-badge">IoT</span>
+        <span class="tech-badge">Sensors</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">PROJECT_02</div>
+      <div class="project-title">Line Follower Robot</div>
+      <div class="project-desc">Autonomous robot using IR sensors and embedded C on 8051 microcontroller. Implemented PID control algorithm for smooth and accurate path tracking across complex routes.</div>
+      <div class="project-tech">
+        <span class="tech-badge">8051 MCU</span>
+        <span class="tech-badge">Embedded C</span>
+        <span class="tech-badge">IR Sensors</span>
+        <span class="tech-badge">PID Control</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">PROJECT_03</div>
+      <div class="project-title">Digital Notice Board</div>
+      <div class="project-desc">Wireless LED matrix scrolling display controlled via microcontroller with remote data input capability. Built for real-time announcement broadcasting in institutional environments.</div>
+      <div class="project-tech">
+        <span class="tech-badge">LED Matrix</span>
+        <span class="tech-badge">Wireless</span>
+        <span class="tech-badge">Microcontroller</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="contact-wrapper">
+    <span class="section-tag" style="display:block;text-align:center">// 04 — Contact</span>
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="section-line" style="margin:0 auto 40px"></div>
+    <p class="contact-desc">Open to internships, embedded systems roles, freelance projects and collaboration opportunities. Let's build something great together.</p>
+    <div class="contact-cards">
+      <a href="mailto:aarifkhan00877@gmail.com" class="contact-card">
+        <span class="contact-card-icon">✉️</span>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-val">aarifkhan00877@gmail.com</div>
+      </a>
+      <a href="tel:+917518788706" class="contact-card">
+        <span class="contact-card-icon">📞</span>
+        <div class="contact-card-label">Phone</div>
+        <div class="contact-card-val">+91 7518788706</div>
+      </a>
+    </div>
+    <a href="mailto:aarifkhan00877@gmail.com" class="btn btn-primary" style="display:inline-flex">Send Me a Message →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2026 <span class="footer-accent">Mohammad Arshad Khan</span> — ECE Engineer</div>
+  <div class="footer-copy" style="font-size:11px">Built with passion · Bengaluru, India</div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Stagger cards
+  document.querySelectorAll('.skill-card, .project-card').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 0.1 + 's';
+  });
+</script>
+</body>
+</html>
